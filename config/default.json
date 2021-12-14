@@ -1,3 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://Brandon:Nothin100@cluster0.jq9bd.mongodb.net/Capstone?retryWrites=true&w=majority"
+    "mongoURI": "mongodb+srv://Brandon:Nothin100@cluster0.jq9bd.mongodb.net/Capstone?retryWrites=true&w=majority",
+    "JWT_SECRET": "uhFJSl2jHu4lsR8GR3d42rtv3ktfj89TFLG248YF9jUKU1YGEFytrf"
 }

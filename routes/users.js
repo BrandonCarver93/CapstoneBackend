@@ -89,4 +89,10 @@ router.delete("/:userId", [auth, admin], async (req, res) => {
   }
 });
 
+//* Get current logged in user
+router.get('/current', [auth], async (req, res) => {
+  const user = await User.findById(req.user._id);
+  return res.send(user);
+});
+
 module.exports = router;
