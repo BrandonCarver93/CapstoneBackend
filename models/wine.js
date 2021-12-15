@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const config = require('config');
 
 const reviewSchema = new mongoose.Schema({
-    wineId: {type: String},
     text: { type: String, required: true},
 })
 const wineSchema = new mongoose.Schema({

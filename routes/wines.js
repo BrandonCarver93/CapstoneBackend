@@ -36,18 +36,16 @@ router.get("/", async (req, res) => {
 });
 
 //* POST reviews
-  router.post('/:wineId/reviews', async (req, res) => {
-    try{
-        let wine = await Wine.findById(req.params.wineId);
-        let review = new Review(req.body);
-        wine.reviews.push(review);
-        await wine.save();
-        return res.send(wine);
-    } catch (ex){
-      return res.status(500).send(`Internal Server Error: ${ex}`);
-    }
+router.post('/:wineId/reviews', async (req, res) => {
+  try{
+      let wine = await Wine.findById(req.params.wineId);
+      let review = new Review(req.body);
+      wine.reviews.push(review);
+      await wine.save();
+      return res.send(wine);
+  } catch (ex){
+    return res.status(500).send(`Internal Server Error: ${ex}`);
+  }
 });
-
-
   module.exports = router;
 
