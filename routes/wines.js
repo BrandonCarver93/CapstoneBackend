@@ -1,5 +1,5 @@
 const { Wine, Review, validateRating } = require("../models/wine");
-const auth = require('../middleware/auth')
+const auth = require('../middleware/auth');
 const express = require('express');
 const router = express.Router();
 //* Get all wines
@@ -33,40 +33,51 @@ router.get("/", async (req, res) => {
 });
 
 //* POST reviews
-router.post('/:wineId/reviews', [auth], async (req, res) => {
+router.post('/:Id/reviews', async (req, res) => {
   try{
-      let wine = await Wine.findById(req.params.wineId);
-      let review = new Review(req.body);
+   
+      let wine = await Wine.findById(req.params.Id);
+      // console.log(wine);
+      let review =  new Review({text: req.body.text});
+      console.log('reviews: ', review);
       wine.reviews.push(review);
       await wine.save();
-      return res.send(wine);
+  
+      return res.status(200);
+      
   } catch (ex){
-      return res.status(500).send(`Internal Server Error: ${ex}`);
+      return res.status(500).send(`Internal Server Error: ${ex.message}`);
     }
+});
+
+router.get('/:Id/reviews', async (req, res) => {
+  try {
+      const wine = await Wine.findById(req.params.Id);
+      return res.send(wine);
+    } catch (ex) {
+        return res.status(500).send(`Internal Server Error: ${ex}`);
+      }
 });
   module.exports = router;
 
-  router.put('/:wineId', async (req, res) => {
+/*   //* PUT update review
+  router.put('/:Id', async (req, res) => {
     try {
         const {error} = validateRating(req.body);
         if (error) return res.status(400).send(error);
-
-        const review = await Review.findByIdAndUpdate(req.params.wineId, 
+        const review = await Review.findByIdAndUpdate(req.params.Id, 
             {
                 rating: req.body.rating
             },
             { new: true }
             );
-
             if (!review)
-                return res.status(400).send(`The wine with id "${req.params.wineId}"
+                return res.status(400).send(`The review with id "${req.params.Id}"
                 does not exist.`);
-
             await review.save();
-
             return res.send(review);
     } catch (ex) {
         return res.status(500).send(`Internal Server Error: ${ex}`);
       }
 });
-
+ */

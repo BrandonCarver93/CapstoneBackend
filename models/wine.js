@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 
 const reviewSchema = new mongoose.Schema({
-    text: { type: String, required: true},
+    text: {type: String, required: true},
     rating: {type: Number, default: 0 },
 })
 const wineSchema = new mongoose.Schema({
