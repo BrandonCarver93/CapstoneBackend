@@ -3,19 +3,20 @@ const Joi = require('joi');
 
 const reviewSchema = new mongoose.Schema({
     text: {type: String, required: true},
-    rating: {type: Number, default: 0 },
+    rating: {type: Number, default: 0},
 })
 const wineSchema = new mongoose.Schema({
     vineyard: { type: String, required: true },
     varietal: { type: String, required: true },
     pairing: { type: String, required: true },
     description: { type: String, required: true },
-    price: { type: Number, required: true },
     reviews: { type: [reviewSchema], default: [] },
+    image: {type: String, required: true},
 });
 
-function validateRating(review) {
+function validateReview(review) {
     const schema = Joi.object({
+        text: Joi.string().required(),
         rating: Joi.number().required()
     });
     return schema.validate(review)
@@ -27,4 +28,4 @@ exports.Review = Review;
 exports.Wine = Wine;
 exports.wineSchema = wineSchema;
 exports.reviewSchema = reviewSchema;
-exports.validateRating = validateRating;
+exports.validateReview = validateReview;
